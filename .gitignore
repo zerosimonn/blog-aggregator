@@ -1,0 +1,17 @@
+# Project files
+.gatorconfig.json
+
+# Binaries
+*.exe
+*.test
+*.out
+/blog-aggregator
+
+# IDE
+.vscode/
+
+# OS
+.DS_Store
+
+# Environment files
+.env
