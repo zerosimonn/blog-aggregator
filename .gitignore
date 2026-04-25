@@ -1,18 +1,27 @@
 # Project files
 .gatorconfig.json
 secrets
+/bin/
+/dist/
+/blog-aggregator
 
 # Binaries
 *.exe
+*.dll
+*.so
+*.dylib
 *.test
 *.out
-/blog-aggregator
+*.tar.gz
 
 # IDE
 .vscode/
+.idea/
+*.swp
 
 # OS
 .DS_Store
+Thumbs.db
 
 # Environment files
 .env
