@@ -1,65 +1,71 @@
 package config
 
 import (
-	"os"
 	"encoding/json"
+	"os"
 	"path/filepath"
 )
 
 const configFileName = ".gatorconfig.json"
 
 type Config struct {
-	DBURL string `json:"db_url"`
+	DBURL           string `json:"db_url"`
 	CurrentUserName string `json:"current_user_name"`
 }
 
+func (cfg *Config) SetUser(userName string) error {
+	cfg.CurrentUserName = userName
+	return write(*cfg)
+}
+
+func Read() (Config, error) {
+	fullPath, err := getConfigFilePath()
+	if err != nil {
+		return Config{}, err
+	}
+
+	file, err := os.Open(fullPath)
+	if err != nil {
+		return Config{}, err
+	}
+	defer file.Close()
+
+	decoder := json.NewDecoder(file)
+	cfg := Config{}
+	err = decoder.Decode(&cfg)
+	if err != nil {
+		return Config{}, err
+	}
+
+	return cfg, nil
+}
+
 func getConfigFilePath() (string, error) {
-	homeDir, err := os.UserHomeDir()
+	home, err := os.UserHomeDir()
 	if err != nil {
 		return "", err
 	}
-	dir := filepath.Join(homeDir, configFileName)
-	return dir, nil
-}
-
-func Read() (Config, error)	{
-	configFilePath, err := getConfigFilePath()
-	if err != nil {
-		return Config{}, err
-	} 
-	data, err := os.ReadFile(configFilePath)
-	if err != nil {
-		return Config{}, err
-	}
-	result := Config{}
-	err = json.Unmarshal(data, &result)
-	if err != nil {
-		return Config{}, err
-	}
-	return result, nil
+	fullPath := filepath.Join(home, configFileName)
+	return fullPath, nil
 }
 
 func write(cfg Config) error {
-	configFilePath, err := getConfigFilePath()
+	fullPath, err := getConfigFilePath()
 	if err != nil {
 		return err
 	}
-	data, err := json.Marshal(cfg)
-	if err != nil {
-		return err
-	}
-	err = os.WriteFile(configFilePath, data, 0600)
-	if err != nil {
-		return err
-	}
-	return nil
-}
 
-func (c *Config) SetUser(userName string) error {
-	c.CurrentUserName = userName
-	err := write(*c)
+	file, err := os.Create(fullPath)
 	if err != nil {
 		return err
 	}
+	defer file.Close()
+
+	encoder := json.NewEncoder(file)
+	err = encoder.Encode(cfg)
+	if err != nil {
+		return err
+	}
+
 	return nil
 }
