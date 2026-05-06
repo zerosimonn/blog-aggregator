@@ -88,6 +88,21 @@ gator/                          ← project root (run sqlc & goose from here)
   dbQueries := database.New(db)
   ```
 
+## Git work reminder
+git checkout -b feature-branchname
+git add .
+git commit -m "wip: halfway there"
+git commit -m "done"
+
+git checkout main
+git merge --squash feature-brachnname
+
+git commit -m "added feature .."
+git push origin main //only push a commit 
+
+git status // staging area
+git log --oneline --graph --all
+
 ## UUIDs (google/uuid)
 
 - Install: `go get github.com/google/uuid`
