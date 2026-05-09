@@ -1,14 +1,16 @@
 package main
 
 import (
-	"github.com/zerosimonn/blog-aggregator/internal/config"
-	"github.com/zerosimonn/blog-aggregator/internal/database"
+	"context"
+	"database/sql"
 	"log"
 	"os"
+
 	_ "github.com/lib/pq"
-	"database/sql"
-	"context"
+	"github.com/zerosimonn/blog-aggregator/internal/config"
+	"github.com/zerosimonn/blog-aggregator/internal/database"
 )
+
 type state struct {
 	db  *database.Queries
 	cfg *config.Config
@@ -45,6 +47,7 @@ func main() {
 	cmds.register("follow", middlewareLoggedIn(handlerFollow))
 	cmds.register("unfollow", middlewareLoggedIn(handlerUnfollow))
 	cmds.register("following", middlewareLoggedIn(handlerListFeedFollows))
+	cmds.register("browse", middlewareLoggedIn(handlerBrowse))
 
 	if len(os.Args) < 2 {
 		log.Fatal("Usage: cli <command> [args...]")
