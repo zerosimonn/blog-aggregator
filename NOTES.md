@@ -129,7 +129,7 @@ commands.go
 handler_*.go
 ```
 
-## Common workflow
+## Example workflow
 
 1. Add migration file in `sql/schema/`
 2. `goose up`
@@ -162,13 +162,4 @@ main.go
 parses CLI args
 looks up the command in the registry
 runs the matching handler
-So main.go is the entry point, commands.go is the routing table, and the handler does the work.
-
-Tiny mental model:
-
-go run . reset
-   -> main.go
-   -> commands.go finds "reset"
-   -> handler_reset.go runs
-   -> calls generated DB code
-   -> SQL deletes all rows from users
+main.go is the entry point, commands.go is the routing table, and the handler does the work.

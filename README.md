@@ -1,6 +1,5 @@
 # Gator
-Aka blog-aggregator.
-A multi-user CLI blog aggregator written in Go.
+gator is a blog-aggregator, specifically a multi-user CLI blog aggregator written in Go.
 
 ## Prerequisites
 
@@ -19,4 +18,10 @@ A multi-user CLI blog aggregator written in Go.
 
 ## Usage
 
-To be filled. 
+1. Run the program using `go run . `
+Commands list: regoster, login, reset, users, agg, feeds, addfeed, follow, unfollow, following, browse.
+
+## Information
+
+1. Explanations in NOTES.md file
+2. References: boot.dev 
