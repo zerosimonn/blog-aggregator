@@ -22,17 +22,21 @@ gator is a blog-aggregator, specifically a multi-user CLI blog aggregator writte
 2. Run the program in production environment using `gator <command1> <comnmand2>`
 Possible commands: regoster, login, reset, users, agg, feeds, addfeed, follow, unfollow, following, browse.
 Example creating a new user:
-`gator register <name>`
-Example adding a feed:
-`gator addfeed <url>`
-Start the aggregator:
+```bash
+gator register <name>
+```
 
+Adding a feed: 
+```bash
+gator addfeed <url>`
+```
+
+Start the aggregator:
 ```bash
 gator agg 30s
 ```
 
 View the posts:
-
 ```bash
 gator browse [limit]
 ```
