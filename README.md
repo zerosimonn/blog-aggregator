@@ -8,18 +8,34 @@ gator is a blog-aggregator, specifically a multi-user CLI blog aggregator writte
 
 ## Setup
 
-1. Create a config file at `~/.gatorconfig.json`:
+1. Create a config file in your home dir as `~/.gatorconfig.json` with:
 
    ```json
    {
      "db_url": "postgres://user:password@localhost:5432/gator?sslmode=disable"
    }
-2. go install
+2. go install ...
 
 ## Usage
 
-1. Run the program using `go run . `
-Commands list: regoster, login, reset, users, agg, feeds, addfeed, follow, unfollow, following, browse.
+1. Run the program in dev environement using `go run . `
+2. Run the program in production environment using `gator <command1> <comnmand2>`
+Possible commands: regoster, login, reset, users, agg, feeds, addfeed, follow, unfollow, following, browse.
+Example creating a new user:
+`gator register <name>`
+Example adding a feed:
+`gator addfeed <url>`
+Start the aggregator:
+
+```bash
+gator agg 30s
+```
+
+View the posts:
+
+```bash
+gator browse [limit]
+```
 
 ## Information
 
